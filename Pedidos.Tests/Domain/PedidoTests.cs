@@ -13,13 +13,10 @@ namespace Pedidos.Tests.Domain
         [Fact]
         public void CriarPedido_DeveCriarComStatusNovo()
         {
-            // Arrange
             var clienteNome = "Cliente Teste";
 
-            // Act
             var pedido = new Pedido(clienteNome);
 
-            // Assert
             pedido.Status.Should().Be(StatusPedido.Novo);
             pedido.ClienteNome.Should().Be(clienteNome);
             pedido.Itens.Should().BeEmpty();
@@ -28,16 +25,13 @@ namespace Pedidos.Tests.Domain
         [Fact]
         public void CriarPedido_DeveCalcularValorTotalComBaseNosItens()
         {
-            // Arrange
             var pedido = new Pedido("Cliente Teste");
 
             pedido.AdicionarItem("Produto A", 2, 10);
             pedido.AdicionarItem("Produto B", 1, 20);
 
-            // Act
             var valorTotal = pedido.ValorTotal;
 
-            // Assert
             valorTotal.Should().Be(40);
         }
 
@@ -139,17 +133,14 @@ namespace Pedidos.Tests.Domain
         [Fact]
         public void PagarPedido_DeveLancarExcecaoQuandoPedidoEstiverPago()
         {
-            // Arrange
             var pedido = new Pedido("Cliente Teste");
 
             pedido.AdicionarItem("Produto 1", 2, 50);
 
             pedido.Pagar();
 
-            // Act
             Action act = () => pedido.Cancelar();
 
-            // Assert
             act.Should()
                 .Throw<PedidoPagoNaoPodeSerCanceladoException>()
                 .WithMessage("Pedido pago não pode ser cancelado");
@@ -158,15 +149,13 @@ namespace Pedidos.Tests.Domain
         [Fact]
         public void PagarPedido_DeveLancarExcecaoQuandoPedidoEstiverCancelado()
         {
-            // Arrange
+
             var pedido = new Pedido("Cliente Teste");
             pedido.AdicionarItem("Produto", 1, 10);
             pedido.Cancelar();
 
-            // Act
             Action act = () => pedido.Pagar();
 
-            // Assert
             act.Should()
                 .Throw<PedidoCanceladoNaoPodeSerPagoException>()
                 .WithMessage("Pedido cancelado não pode ser pago");
@@ -174,14 +163,11 @@ namespace Pedidos.Tests.Domain
         [Fact]
         public void PagarPedido_DeveAlterarStatusParaPagoQuandoPedidoForValido()
         {
-            // Arrange
             var pedido = new Pedido("Cliente Teste");
             pedido.AdicionarItem("Produto", 2, 15);
 
-            // Act
             pedido.Pagar();
 
-            // Assert
             pedido.Status.Should().Be(StatusPedido.Pago);
         }
     }

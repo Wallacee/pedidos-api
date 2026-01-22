@@ -13,7 +13,7 @@ namespace Pedidos.Domain.Entities
 
         public List<ItemPedido> Itens { get; private set; } = new();
 
-        protected Pedido() { } // EF
+        protected Pedido() { } 
 
         public Pedido(string clienteNome)
         {

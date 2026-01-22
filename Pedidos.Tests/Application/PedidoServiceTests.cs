@@ -29,17 +29,14 @@ namespace Pedidos.Tests.Application
         [Fact]
         public async Task CriarPedidoAsync_DeveLancarExcecaoQuandoNaoHouverItens()
         {
-            // Arrange
             var request = new CriarPedidoRequest
             {
                 ClienteNome = "Cliente Teste",
                 Itens = []
             };
 
-            // Act
             Func<Task> act = async () => await _service.CriarAsync(request);
 
-            // Assert
             await act.Should()
                 .ThrowAsync<ArgumentException>()
                 .WithMessage("Pedido deve conter ao menos um item");
@@ -48,7 +45,7 @@ namespace Pedidos.Tests.Application
         [Fact]
         public async Task CriarPedidoAsync_DeveCriarPedidoQuandoRequestForValido()
         {
-            // Arrange
+
             var request = new CriarPedidoRequest
             {
                 ClienteNome = "Cliente Teste",
@@ -72,10 +69,8 @@ namespace Pedidos.Tests.Application
                 .Setup(m => m.Map<PedidoResponse>(It.IsAny<Pedido>()))
                 .Returns(response);
 
-            // Act
             var result = await _service.CriarAsync(request);
 
-            // Assert
             result.Should().NotBeNull();
             result.ClienteNome.Should().Be("Cliente Teste");
 
@@ -88,22 +83,18 @@ namespace Pedidos.Tests.Application
         [Fact]
         public async Task BuscarPorIdAsync_DeveRetornarNullQuandoPedidoNaoExistir()
         {
-            // Arrange
             _repositoryMock
                 .Setup(r => r.ObterPorIdAsync(It.IsAny<Guid>()))
                 .ReturnsAsync((Pedido?)null);
 
-            // Act
             var result = await _service.ObterPorIdAsync(Guid.NewGuid());
 
-            // Assert
             result.Should().BeNull();
         }
 
         [Fact]
         public async Task BuscarPorIdAsync_DeveRetornarPedidoQuandoExistir()
         {
-            // Arrange
             var pedido = new Pedido("Cliente Teste");
 
             var response = new PedidoResponse
@@ -119,10 +110,8 @@ namespace Pedidos.Tests.Application
                 .Setup(m => m.Map<PedidoResponse>(pedido))
                 .Returns(response);
 
-            // Act
             var result = await _service.ObterPorIdAsync(Guid.NewGuid());
 
-            // Assert
             result.Should().NotBeNull();
             result!.ClienteNome.Should().Be("Cliente Teste");
         }
@@ -130,7 +119,6 @@ namespace Pedidos.Tests.Application
         [Fact]
         public async Task BuscarTodosAsync_DeveBuscarPorStatusQuandoStatusForInformado()
         {
-            // Arrange
             var pedidos = new List<Pedido>
             {
                 new("Cliente 1"),
@@ -149,17 +137,14 @@ namespace Pedidos.Tests.Application
                     new()
                 ]);
 
-            // Act
             var result = await _service.ObterPorStatusAsync(StatusPedido.Novo, 1, 10);
 
-            // Assert
             result.Should().HaveCount(2);
         }
 
         [Fact]
         public async Task BuscarTodosAsync_DeveBuscarTodosQuandoStatusForNulo()
         {
-            // Arrange
             var pedidos = new List<Pedido>
             {
                 new("Cliente 1")
@@ -176,10 +161,8 @@ namespace Pedidos.Tests.Application
                     new()
                 ]);
 
-            // Act
             var result = await _service.ObterPorStatusAsync(null, 1, 10);
 
-            // Assert
             result.Should().HaveCount(1);
         }
     
@@ -187,7 +170,6 @@ namespace Pedidos.Tests.Application
         [Fact]
         public async Task CancelarPedidoAsync_DeveCancelarPedidoQuandoStatusForNovo()
         {
-            // Arrange
             var pedido = new Pedido("Cliente Teste");
 
             var repositoryMock = new Mock<IPedidoRepository>();
@@ -197,10 +179,8 @@ namespace Pedidos.Tests.Application
 
             var service = new PedidoService(repositoryMock.Object, null!);
 
-            // Act
             await service.CancelarAsync(pedido.Id);
 
-            // Assert
             pedido.Status.Should().Be(StatusPedido.Cancelado);
             repositoryMock.Verify(r => r.AtualizarAsync(pedido), Times.Once);
         }

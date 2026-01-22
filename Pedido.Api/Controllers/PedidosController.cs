@@ -25,8 +25,6 @@ namespace Pedidos.Api.Controllers
         {
             var pedidoId = await _service.CriarAsync(request);
 
-            // 🚫 NADA DE CreatedAtAction / CreatedAtRoute
-            // ✅ Forma segura e aceita em qualquer empresa
             return Created($"/pedidos/{pedidoId}", new { id = pedidoId });
         }
 
