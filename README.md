@@ -20,7 +20,7 @@ API RESTful para gerenciamento de pedidos, desenvolvida como **case técnico**, 
 | 1️⃣ | `dotnet restore` | Restaura todas as dependências do projeto | Raiz da solution |
 | 2️⃣ | `dotnet ef database update` | Cria / atualiza o banco SQLite via migrations | Pedidos.Api |
 | 3️⃣ | `dotnet run --project Pedidos.Api` | Compila e inicia a API | Raiz da solution |
-| 4️⃣ | `https://localhost:{porta}/swagger` | Acessar documentação Swagger | Navegador |
+| 4️⃣ | `http://localhost:{porta}/swagger` | Acessar documentação Swagger | Navegador |
 
 ---
 

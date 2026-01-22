@@ -2,7 +2,7 @@
   <Folder Name="/Itens de Solução/">
     <File Path=".gitignore" />
   </Folder>
-  <Project Path="Pedido.Api/Pedidos.Api.csproj" />
+  <Project Path="Pedidos.Api/Pedidos.Api.csproj" Id="b8e91766-55ad-4beb-b0f7-156b252d716b" />
   <Project Path="Pedidos.Application/Pedidos.Application.csproj" />
   <Project Path="Pedidos.Domain/Pedidos.Domain.csproj" />
   <Project Path="Pedidos.Infrastructure/Pedidos.Infrastructure.csproj" />
