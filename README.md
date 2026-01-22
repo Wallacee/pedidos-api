@@ -201,6 +201,20 @@ Facilidade de leitura pelo avaliador
 
 ---
 
+
+## 🛠️ Ambiente de Desenvolvimento
+
+O projeto foi desenvolvido utilizando o **Visual Studio 2026 (Community – Insiders)** como IDE principal, aproveitando recursos avançados de produtividade, debugging e integração com o ecossistema .NET.
+
+A escolha dessa IDE permitiu:
+- Debug avançado e inspeção detalhada de estado
+- Integração nativa com Entity Framework, xUnit e ferramentas de cobertura
+- Produtividade no desenvolvimento de APIs REST com ASP.NET Core
+- Suporte completo ao ciclo de desenvolvimento, testes e execução local
+
+
+---
+
 ### 👤 Autor
 
 Wallace Veridiano de Jesus
