@@ -1,0 +1,73 @@
+############################################
+# .NET / Visual Studio
+############################################
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+############################################
+# Build outputs
+############################################
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+############################################
+# Logs
+############################################
+*.log
+
+############################################
+# Databases (SQLite)
+# Banco gerado em runtime (não versionar)
+############################################
+*.db
+*.sqlite
+*.sqlite3
+/Pedidos/Pedido.Api/*.db
+
+############################################
+# Entity Framework
+############################################
+Migrations/*.Designer.cs
+Migrations/*.csproj.user
+
+############################################
+# Test results
+############################################
+TestResults/
+**/TestResults/
+
+############################################
+# Code coverage
+############################################
+coverage-report/
+**/coverage-report/
+coverage.cobertura.xml
+**/coverage.cobertura.xml
+coverage.json
+coverage.opencover.xml
+
+############################################
+# OS files
+############################################
+.DS_Store
+Thumbs.db
+
+
+############################################
+# Environment / Secrets
+############################################
+.env
+.env.*
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
