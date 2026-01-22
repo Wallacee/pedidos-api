@@ -2,44 +2,52 @@
 
 API RESTful para gerenciamento de pedidos, desenvolvida como **case técnico**, com foco em **arquitetura limpa, regras de negócio explícitas, testabilidade e boas práticas** adotadas em ambientes corporativos.
 
----
-
-## 🚀 Como Executar e Avaliar o Projeto (Quick Start)
 
 ---
 
-### 📂 Onde executar os comandos
+## ▶️ Como Executar o Projeto
 
-Todos os comandos devem ser executados na raiz da solution no PowerShell ou Prompt de Comando (onde está o arquivo .sln).
+> **Importante:**  
+> Todos os comandos devem ser executados na **raiz da solution** (pasta onde está o arquivo `.slnx`), exceto **dotnet ef database update (passo 2)** que deve ser execultado em **Pedidos.Api** .
+> **Acompanhe as tabelas abaixo com atenção.**
 
-### ▶️ Executar a API
+---
 
-dotnet restore
+## 🚀 Executar a API
 
-dotnet ef database update
+| Ordem | Comando | Descrição | Onde Executar |
+|------|--------|----------|---------------|
+| 1️⃣ | `dotnet restore` | Restaura todas as dependências do projeto | Raiz da solution |
+| 2️⃣ | `dotnet ef database update` | Cria / atualiza o banco SQLite via migrations | Pedidos.Api |
+| 3️⃣ | `dotnet run --project Pedidos.Api` | Compila e inicia a API | Raiz da solution |
+| 4️⃣ | `https://localhost:{porta}/swagger` | Acessar documentação Swagger | Navegador |
 
-dotnet run --project Pedidos.Api
+---
 
+## 🧪 Executar Testes Automatizados
 
-### ▶️ Acesse o Swagger
+| Ordem | Comando | Descrição | Onde Executar |
+|------|--------|----------|---------------|
+| 5️⃣ | `dotnet test` | Executa todos os testes automatizados | Raiz da solution |
 
-https://localhost:{porta}/swagger
+---
 
-### 🧪 Executar Testes
+## 📊 Gerar Relatório de Cobertura de Código
 
-dotnet test
+| Ordem | Comando | Descrição | Onde Executar |
+|------|--------|----------|---------------|
+| 6️⃣ | `dotnet test Pedidos.Tests --collect:"XPlat Code Coverage"` | Executa testes e gera dados de cobertura | Raiz da solution |
+| 7️⃣ | `reportgenerator -reports:"Pedidos.Tests/TestResults/**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html` | Gera relatório HTML de cobertura | Raiz da solution |
+| 8️⃣ | `explorer coverage-report/index.html` | Abre o relatório de cobertura | Raiz da solution |
 
-### 📊 Gerar Relatório de Cobertura
+---
 
-dotnet test Pedidos.Tests --collect:"XPlat Code Coverage"
+## 🧠 Observações
 
-reportgenerator -reports:"Pedidos.Tests/TestResults/**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html
+- O banco de dados **não é versionado no repositório**
+- O banco é **gerado automaticamente via Entity Framework Migrations**
+- Essa abordagem garante **ambiente reproduzível** e **facilidade de avaliação**
 
-
-Abrir relatório:
-explorer coverage-report
-
-Abrir -> coverage-report/index.html (Relatório de cobertura)
 
 ---
 
