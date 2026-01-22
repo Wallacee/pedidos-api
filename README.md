@@ -38,7 +38,7 @@ API RESTful para gerenciamento de pedidos, desenvolvida como **case técnico**, 
 |------|--------|----------|---------------|
 | 6️⃣ | `dotnet test Pedidos.Tests --collect:"XPlat Code Coverage"` | Executa testes e gera dados de cobertura | Raiz da solution |
 | 7️⃣ | `reportgenerator -reports:"Pedidos.Tests/TestResults/**/coverage.cobertura.xml" -targetdir:"coverage-report" -reporttypes:Html` | Gera relatório HTML de cobertura | Raiz da solution |
-| 8️⃣ | `explorer coverage-report/index.html` | Abre o relatório de cobertura | Raiz da solution |
+| 8️⃣ | `explorer .\coverage-report\index.html` | Abre o relatório de cobertura | Raiz da solution |
 
 ---
 
@@ -50,6 +50,48 @@ API RESTful para gerenciamento de pedidos, desenvolvida como **case técnico**, 
 
 
 ---
+
+## 📊 Observabilidade e Logs
+
+A aplicação utiliza **logs estruturados** para registrar eventos relevantes do fluxo de negócio, facilitando **monitoramento, troubleshooting e auditoria**, seguindo práticas comuns em ambientes corporativos.
+
+### 🔍 Estratégia de Logging
+
+Os logs estão concentrados na **camada Application (Services)**, garantindo visibilidade sobre decisões de negócio sem poluir controllers ou infraestrutura.
+
+### 📌 O que é registrado
+
+| Evento | Nível | Descrição |
+|------|------|----------|
+| Criação de pedido | Information | Início e sucesso da criação de um pedido |
+| Validação de regras | Warning | Tentativas inválidas (ex: pedido sem itens, pedido inexistente) |
+| Consulta de pedidos | Information | Busca por ID, listagem com filtros e paginação |
+| Cancelamento de pedido | Information / Warning | Cancelamento bem-sucedido ou tentativa inválida |
+| Pagamento de pedido | Information | Transição de status para **Pago** |
+
+Os logs utilizam **mensagens estruturadas**, permitindo fácil correlação e análise:
+
+Pedido {PedidoId} criado com sucesso
+Solicitação de pagamento do pedido {PedidoId}
+
+---
+### 🛠️ Tecnologias Utilizadas (Logs)
+
+- **ILogger\<T\>** (`Microsoft.Extensions.Logging`)
+- Logs estruturados com *placeholders*
+- **Providers configurados:**
+  - Console
+  - Debug
+
+---
+
+### ▶️ Onde visualizar os logs
+
+| Ambiente | Local |
+|--------|------|
+| Execução via terminal | Console onde o comando `dotnet run` é executado |
+| Execução via Visual Studio | Aba **Output** → *ASP.NET Core Web Server* ou *Debug* |
+
 
 ### 🧭 Arquitetura e Organização
 
